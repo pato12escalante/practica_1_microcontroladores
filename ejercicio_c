@@ -1,0 +1,75 @@
+/*
+ * File:   main.c
+ * Author: Patricio Escalante
+ *
+ * Created on 31 de agosto de 2021, 02:34 AM
+ */
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <xc.h>
+#include "configbits.h"
+
+#define _XTAL_FREQ 4000000
+
+/*
+ * 
+ */
+
+char boton=0;
+
+void main() {
+    TRISB=0b10000000;
+    TRISD=0;
+    
+    while(1){
+        LATD=0b00111111;
+        
+        boton=PORTBbits.RB7;
+        
+        if(boton==1){
+            LATD=0b01101111; //9
+            __delay_ms(1000);
+            
+            LATD=0b01111111; //8
+            __delay_ms(1000);
+            
+            LATD=0b00000111; //7
+            __delay_ms(1000);
+            
+            LATD=0b01111101; //6
+            __delay_ms(1000);
+            
+            LATD=0b01101101; //5
+            __delay_ms(1000);
+            
+            LATD=0b01100110; //4
+            __delay_ms(1000);
+            
+            LATD=0b01001111; //3
+            LATBbits.LATB1 = 1;
+            __delay_ms(200);
+            LATBbits.LATB1 = 0;
+            __delay_ms(800);
+            
+            LATD=0b01011011; //2
+            LATBbits.LATB1 = 1;
+            __delay_ms(200);
+            LATBbits.LATB1 = 0;
+            __delay_ms(800);
+            
+            LATD=0b00000110; //1
+            LATBbits.LATB1 = 1;
+            __delay_ms(200);
+            LATBbits.LATB1 = 0;
+            __delay_ms(800);
+            
+            LATD=0b00111111; //0
+            LATBbits.LATB1 = 1;
+            __delay_ms(1000);
+            LATBbits.LATB1 = 0;
+        }
+    }
+    
+}
