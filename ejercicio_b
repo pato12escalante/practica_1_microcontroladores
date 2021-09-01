@@ -1,0 +1,106 @@
+/*
+ * File:   main.c
+ * Author: Patricio Escalante
+ *
+ * Created on 30 de agosto de 2021, 12:12 PM
+ */
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <xc.h>
+#include "configbits.h"
+
+#define _XTAL_FREQ 4000000
+
+/*
+ * 
+ */
+
+char boton_1=0, boton_2=0, boton_3=0, boton_4=0, boton_5=0;
+
+
+void main() {
+    
+    TRISB=255;
+    TRISD=0;
+    
+    while(1){
+        boton_1 = PORTBbits.RB0;
+        boton_2 = PORTBbits.RB1;
+        boton_3 = PORTBbits.RB2;
+        boton_4 = PORTBbits.RB3;
+        boton_5 = PORTBbits.RB4;
+        
+        LATD=0b00111111; 
+        
+        if(boton_1==1){
+            while(boton_2==0 && boton_3==0 && boton_4==0 && boton_5==0){
+                boton_1 = PORTBbits.RB0;
+                boton_2 = PORTBbits.RB1;
+                boton_3 = PORTBbits.RB2;
+                boton_4 = PORTBbits.RB3;
+                boton_5 = PORTBbits.RB4;
+                
+                LATD=0b00000110;
+            }
+        }
+        
+        
+        if(boton_2==1){
+            
+            while(boton_1==0 && boton_3==0 && boton_4==0 && boton_5==0){
+                boton_1 = PORTBbits.RB0;
+                boton_2 = PORTBbits.RB1;
+                boton_3 = PORTBbits.RB2;
+                boton_4 = PORTBbits.RB3;
+                boton_5 = PORTBbits.RB4;
+                
+                LATD=0b01011011;
+            }
+            
+        }
+        
+        if(boton_3==1){
+            while(boton_1==0 && boton_2==0 && boton_4==0 && boton_5==0){
+                boton_1 = PORTBbits.RB0;
+                boton_2 = PORTBbits.RB1;
+                boton_3 = PORTBbits.RB2;
+                boton_4 = PORTBbits.RB3;
+                boton_5 = PORTBbits.RB4;
+                
+                LATD=0b01001111;
+            }
+        }
+        
+        if(boton_4==1){
+            while(boton_1==0 && boton_2==0 && boton_3==0 && boton_5==0){
+                boton_1 = PORTBbits.RB0;
+                boton_2 = PORTBbits.RB1;
+                boton_3 = PORTBbits.RB2;
+                boton_4 = PORTBbits.RB3;
+                boton_5 = PORTBbits.RB4;
+                
+                LATD=0b01100110;
+            }
+        }
+        
+        if(boton_5==1){
+            while(boton_1==0 && boton_2==0 && boton_3==0 && boton_4==0){
+                boton_1 = PORTBbits.RB0;
+                boton_2 = PORTBbits.RB1;
+                boton_3 = PORTBbits.RB2;
+                boton_4 = PORTBbits.RB3;
+                boton_5 = PORTBbits.RB4;
+                
+                LATD=0b01101101;
+            }
+        }
+        
+        
+        
+        
+        
+      
+   }
+}
