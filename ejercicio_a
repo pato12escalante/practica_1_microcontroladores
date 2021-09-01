@@ -1,0 +1,65 @@
+/*
+ * File:   main.c
+ * Author: Patricio Escalante
+ *
+ * Created on 30 de agosto de 2021, 01:03 AM
+ */
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <xc.h>
+#include "configbits.h"
+
+#define _XTAL_FREQ 4000000
+
+/*
+ * 
+ */
+
+
+char variable_izquierda[8]={0b00000001, 0b00000010, 0b00000100, 0b00001000, 0b00010000, 0b00100000, 0b01000000, 0b10000000, 0b00000000};
+char variable_derecha[8]={0b10000000, 0b01000000, 0b00100000, 0b00010000, 0b00001000, 0b00000100, 0b00000010, 0b00000001, 0b00000000};
+char boton_izquierda=0, boton_derecha=0;
+
+
+
+
+void izquierda(){
+    for(char i=0;i<8;i++){
+        LATD=variable_izquierda[i];
+        __delay_ms(400);
+    }
+}
+
+
+
+void derecha(){
+    for(char i=0;i<8;i++){
+        LATD=variable_derecha[i];
+        __delay_ms(400);
+    }
+}
+
+void main(){
+    TRISD = 0;
+    TRISB = 255;
+    
+    
+    while(1){
+        LATD=0b00000000;
+        
+        boton_izquierda = PORTBbits.RB0;
+        if(boton_izquierda==1){
+            izquierda();
+        }
+        
+        
+        boton_derecha = PORTBbits.RB1;
+        if(boton_derecha==1){
+            derecha();
+        }
+        
+        
+    }
+}
